@@ -74,10 +74,6 @@ Este template inclui algumas boas práticas para desenvolvimento Android:
 * [Jetpack Compose](https://developer.android.com/jetpack/compose)
 * [Material Design 3](https://m3.material.io/)
 
-## Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
-
 
 ## Licença
 

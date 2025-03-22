@@ -1,3 +1,5 @@
+import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -35,12 +37,16 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        compose = true
+        compose = true //enable compose
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15" // Correct location
     }
 }
 
 dependencies {
-
+    implementation (libs.androidx.material.icons.extended) // ou a versão mais recente
+    implementation(libs.androidx.runtime)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
@@ -52,6 +58,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.tv.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
