@@ -2,6 +2,7 @@ package com.example.myapp.model
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
+//import androidx.preference.contains
 import com.example.myapp.R
 
 object DataSource {
@@ -11,6 +12,7 @@ object DataSource {
             id = "1",
             name = "Em águas profundas",
             author = "Patricia Highsmith",
+            category = "Suspense",
             resume = "Vic e Melinda estão longe de ser um casal feliz ― seu casamento é mantido por um acordo nada convencional: " +
                     "Melinda pode ter quantos amantes quiser contanto que não arraste os dois e a filha para o caos de um divórcio. " +
                     "Tudo parece bem, mas, com o passar do tempo, Vic começa a se incomodar com os homens escolhidos pela esposa e " +
@@ -23,6 +25,7 @@ object DataSource {
             id = "2",
             name = "Manson: A Biografia",
             author = "Jeff Guinn",
+            category = "True crime",
             resume = "Charles Manson fez de sua história a trilha sonora do fim do mundo. A metáfora favorita da América para o " +
                     "lado negro dá década de 1960, Manson foi o cabeludo que matou o sonho de Woodstock e o retrato perfeito de como " +
                     "toda aquela filosofia da geração paz e amor não funcionou.\n" +
@@ -38,6 +41,7 @@ object DataSource {
             id = "3",
             name = "Os sofrimentos do jovem Werther",
             author = "Johann Wolfgang Von Goethe",
+            category = "Romance epistolar",
             resume = "Os sofrimentos do Jovem Werther é definido como um marco na literatura alemã e mundial. Escrito em 1774, foi " +
                     "uma das obras que mais influenciaram os jovens do período. Marcada por uma narração densa, lírica e essencialmente" +
                     " psicológica, a personagem atormentada de Werther tornou-se um modelo de herói pré-romântico. A obra relata a " +
@@ -49,6 +53,7 @@ object DataSource {
             id = "4",
             name = "Ted Bundy: Um Estranho ao Meu Lado",
             author = "Ann Rule",
+            category = "True Crime",
             resume = "Quando Ann Rule conheceu Ted Bundy em um centro de atendimento de prevenção ao suicídio, ela não fazia " +
                     "ideia de que aquele rapaz simpático e inteligente ― que sentava ao lado dela e de quem até chegou a receber " +
                     "um cartão de Natal ― se tornaria um dos serial killers mais proeminentes da história. Ted Bundy confessou ter " +
@@ -60,6 +65,7 @@ object DataSource {
             id = "5",
             name = "A metamorfose",
             author = "Franz Kafka",
+            category = "Romance",
             resume = "A metamorfose é a mais célebre novela de Franz Kafka e uma das mais importantes de toda a história da literatura." +
                     " Sem a menor cerimônia, o texto coloca o leitor diante de um caixeiro-viajante - o famoso Gregor Samsa - " +
                     "transformado em inseto monstruoso. A partir daí, a história é narrada com um realismo inesperado que associa o " +
@@ -70,6 +76,7 @@ object DataSource {
             id = "6",
             name = "Os abismos",
             author = "Pilar Quintana",
+            category = "Ficção Literária",
             resume = "Claudia mora com os pais em Cáli, na Colômbia, em um apartamento tomado por plantas e rodeado por precipícios " +
                     "físicos e metafóricos. O ambiente, exuberante e bem-cuidado, é um contraste, uma oposição à mãe indiferente " +
                     "que está em conflito com os caminhos escolhidos e impostos para a própria vida. Como muitas famílias, a de " +
@@ -91,6 +98,7 @@ object DataSource {
             id = "7",
             name = "As outras pessoas",
             author = "C. J. Tudor",
+            category = "Suspense",
             resume = "Gabe Forman está preso em um engarrafamento, atrasado para o jantar em casa com a família, quando o rosto " +
                     "de sua filha, Izzy, de cinco anos, aparece no vidro traseiro do carro à frente e balbucia “papai”. " +
                     "Três anos depois, Gabe passa seus dias e noites rodando pela estrada em que viu Izzy pela última vez.\n" +
@@ -113,6 +121,7 @@ object DataSource {
             id = "8",
             name = "A guerra dos mundos",
             author = "H.G. Wells",
+            category = "Ficção científica",
             resume = "Quando um exército de invasores marcianos chega à Inglaterra, o pânico e o terror tomam conta da população. " +
                     "Enquanto os alienígenas atravessam o país em enormes máquinas de três pernas, incinerando tudo em seu caminho " +
                     "com um raio de calor e espalhando gases tóxicos nocivos, os moradores da Terra devem chegar a um acordo com a" +
@@ -122,6 +131,7 @@ object DataSource {
             id = "9",
             name = "Six of crows: Sangue e mentiras",
             author = "Leigh Bardugo",
+            category = "Fantasia",
             resume = "A OESTE DE RAVKA, ONDE GRISHAS SÃO ESCRAVIZADOS E ENVOLVIDOS EM JOGOS DE CONTRABANDISTAS E MERCADORES... " +
                     "fica Ketterdam, capital de Kerch, um lugar agitado onde tudo pode ser conseguido pelo preço certo. Nas ruas " +
                     "e nos becos que fervilham de traições, mercadorias ilegais e assuntos escusos entre gangues, ninguém é melhor " +
@@ -138,25 +148,41 @@ object DataSource {
             id = "10",
             name = "Meu filho Dahmer",
             author = "Lionel Dahmer",
+            category = "True crime",
             resume = "Neste controverso livro de memórias, o pai de Jeffrey Dahmer busca entender a partir do seu ponto de vista " +
                     "a origem da verdadeira fome que habitava os olhos e a mente de seu filho",
             imageResId = R.drawable.meu_filho_dahmer),
     )
     var favoriteBooks: SnapshotStateList<Book> = mutableStateListOf()
+    //private val wantToReadBooks = mutableListOf<Book>()
+    var wantToReadBooks: SnapshotStateList<Book> = mutableStateListOf()
 
     fun addToFavorites(book: Book) {
         if (!favoriteBooks.contains(book)) {
             favoriteBooks.add(book)
         }
     }
-
     fun removeFromFavorites(book: Book) {
         favoriteBooks.remove(book)
     }
-
     fun isFavorite(book: Book): Boolean {
         return favoriteBooks.contains(book)
     }
+    fun addToWantToRead(book: Book) {
+        if (!wantToReadBooks.contains(book)) {
+            wantToReadBooks.add(book)
+        }
+    }
+    fun removeFromWantToRead(book: Book) {
+        wantToReadBooks.remove(book)
+    }
+    fun isWantToRead(book: Book): Boolean {
+        return wantToReadBooks.contains(book)
+    }
+
+    //fun getWantToReadBooks(): List<Book> {
+    //    return wantToReadBooks
+   // }
 
     val user = User(
         name = "User",

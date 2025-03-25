@@ -2,6 +2,7 @@ package com.example.myapp.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -9,10 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +34,7 @@ import com.example.myapp.ui.theme.backgroundColor
 import com.example.myapp.ui.theme.buttonTextColor
 import com.example.myapp.ui.theme.primaryColor
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,6 +43,7 @@ import com.example.myapp.ui.theme.textColor
 @Composable
 fun DetailsScreen(navController: NavHostController, bookId: String) {
     val book = DataSource.books.find { it.id == bookId }
+
     book?.let {
         BookDetails(navController = navController, book = it)
     }
@@ -50,8 +55,8 @@ fun BookDetails(navController: NavHostController, book: Book) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-            .background(backgroundColor),
-        horizontalAlignment = Alignment.CenterHorizontally
+          .background(backgroundColor),
+
     ) {
         Button(onClick = { navController.navigate("home") },
             modifier = Modifier.padding(horizontal = 16.dp),
@@ -65,36 +70,52 @@ fun BookDetails(navController: NavHostController, book: Book) {
         ){
             Column(
                 modifier = Modifier.padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
             ){
                 Image(
                     painter = rememberAsyncImagePainter(model = book.imageResId),
                     contentDescription = "Book Cover",
                     modifier = Modifier
-                        .padding(bottom = 16.dp)
-                        .padding(top = 50.dp)
-                        .size(200.dp)
-                        .aspectRatio(0.66f)
-                        .clip(MaterialTheme.shapes.medium),
+                        .width(200.dp)
+                        .height(300.dp),
+                      //  .padding(bottom = 16.dp)
+                      //  .padding(top = 50.dp)
+                      //  .size(200.dp)
+                        //.aspectRatio(0.66f)
+                      //  .clip(MaterialTheme.shapes.medium),
                     contentScale = ContentScale.Crop
                 )
-                Spacer(modifier = Modifier
-                    .height(16.dp))
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Text( modifier = Modifier
                     .padding(top = 40.dp),
                     text = book.name,
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
-                    color = textColor)
-                Spacer(modifier = Modifier
-                    .height(8.dp))
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
                 Text(
                     text = "by ${book.author}",
                     style = MaterialTheme.typography.titleMedium,
                     fontStyle = FontStyle.Italic,
-                    color = textColor)
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
                 Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "Category: ${book.category}",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Text(modifier = Modifier
                     .background(buttonTextColor)
                     .padding(16.dp)
@@ -103,6 +124,9 @@ fun BookDetails(navController: NavHostController, book: Book) {
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Justify,
                     color = textColor)
+
+                HorizontalDivider(color = MaterialTheme.colorScheme.outline, thickness = 1.dp)
+
 
             }
         }

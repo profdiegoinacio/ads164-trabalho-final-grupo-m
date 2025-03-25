@@ -17,7 +17,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.outlined.StarBorder
+import androidx.compose.material.icons.outlined.ThumbUpOffAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedCard
@@ -79,6 +81,13 @@ fun HomeScreen(navController: NavHostController) {
                         } else {
                             DataSource.addToFavorites(book)
                         }
+                    },
+                    onWantToReadClick = {
+                        if (DataSource.isWantToRead(book)) {
+                            DataSource.removeFromWantToRead(book)
+                        } else {
+                            DataSource.addToWantToRead(book)
+                        }
                     }
                 )
             }
@@ -90,7 +99,8 @@ fun HomeScreen(navController: NavHostController) {
 fun BookListItem(
     book: Book,
     navController: NavHostController,
-    onFavoriteClick: () -> Unit
+    onFavoriteClick: () -> Unit,
+    onWantToReadClick: () -> Unit
 ) {
     ElevatedCard(
         modifier = Modifier
@@ -122,13 +132,30 @@ fun BookListItem(
                     color = textColor
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-            }
-            IconButton(onClick = onFavoriteClick) {
-                Icon(
-                    imageVector = if (DataSource.isFavorite(book)) Icons.Filled.Star else Icons.Outlined.StarBorder,
-                    contentDescription = "Favorite",
-                    tint = if (DataSource.isFavorite(book)) Color.Yellow else Color.Gray
+
+                Text(
+                    text = book.category,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+            Row { // Add this row
+                IconButton(onClick = onWantToReadClick) {
+                    Icon(
+                        imageVector = if (DataSource.isWantToRead(book)) Icons.Filled.ThumbUp else Icons.Outlined.ThumbUpOffAlt,
+                        contentDescription = "Want to Read",
+                        tint = if (DataSource.isWantToRead(book)) Color.Green else Color.Gray
+                    )
+                }
+                IconButton(onClick = onFavoriteClick) {
+                    Icon(
+                        imageVector = if (DataSource.isFavorite(book)) Icons.Filled.Star else Icons.Outlined.StarBorder,
+                        contentDescription = "Favorite",
+                        tint = if (DataSource.isFavorite(book)) Color.Yellow else Color.Gray
+                    )
+                }
+
             }
         }
     }
