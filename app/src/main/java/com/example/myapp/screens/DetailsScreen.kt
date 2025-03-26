@@ -110,7 +110,6 @@ fun DetailsScreen(navController: NavHostController, bookId: String) {
                     modifier = Modifier.size(48.dp)
                 )
             }
-            //
             Spacer(modifier = Modifier.width(16.dp))
             IconButton(onClick = {
                 if (DataSource.isFinishedReading(book)) {
@@ -130,19 +129,19 @@ fun DetailsScreen(navController: NavHostController, bookId: String) {
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = book.name,
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "by ${book.author}",
+            text = "de ${book.author}",
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Category: ${book.category}",
+            text = "Categoria: ${book.category}",
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center
         )

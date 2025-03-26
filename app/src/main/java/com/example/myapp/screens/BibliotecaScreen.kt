@@ -124,7 +124,7 @@ fun BookItem(book: Book, navController: NavHostController) {
     ElevatedCard(
         modifier = Modifier
             .width(140.dp)
-            .height(215.dp)
+            .height(230.dp)
             .clickable {
                 navController.navigate("details/${book.id}") // Navigate to DetailsScreen
             },
@@ -141,7 +141,7 @@ fun BookItem(book: Book, navController: NavHostController) {
                 contentDescription = "Book Cover",
                 modifier = Modifier
                     .width(120.dp)
-                    .height(140.dp)
+                    .height(160.dp)
                     .clip(MaterialTheme.shapes.medium),
                 contentScale = ContentScale.Crop
             )

@@ -3,6 +3,7 @@ import androidx.annotation.DrawableRes
 
 data class User(
     val name: String,
-    @DrawableRes val imageResId: Int, // URL for the user's profile picture
-    val favoriteBooks: List<Book>
+    val email: String,
+    @DrawableRes val imageResId: Int,
+   // val favoriteBooks: List<Book>
 )

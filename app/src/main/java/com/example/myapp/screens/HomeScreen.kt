@@ -1,6 +1,7 @@
 package com.example.myapp.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -45,11 +46,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.rememberAsyncImagePainter
 import com.example.myapp.model.Book
 import com.example.myapp.model.DataSource
 import com.example.myapp.ui.theme.buttonTextColor
+import com.example.myapp.ui.theme.darkGray
+import com.example.myapp.ui.theme.lightGray
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,13 +102,12 @@ fun HomeScreen(navController: NavHostController) {
             }
         ) {
         }
-        // Removed the "Go to profile" button
-        Spacer(modifier = Modifier.height(16.dp)) // Spacing before the book list
+        Spacer(modifier = Modifier.height(16.dp))
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Increased spacing between items
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(filteredBooks) { book ->
                 BookItem(
@@ -164,26 +167,27 @@ fun BookItem(
                     painter = rememberAsyncImagePainter(model = book.imageResId),
                     contentDescription = "Book Cover",
                     modifier = Modifier
-                        .width(60.dp)
-                        .height(90.dp)
-                        .clip(RoundedCornerShape(8.dp)), // Rounded corners for the image
+                        .width(90.dp)
+                        .height(130.dp)
+                        .clip(RoundedCornerShape(8.dp)),
                     contentScale = ContentScale.Crop
                 )
-                Spacer(modifier = Modifier.width(16.dp)) // Spacing between image and text
+                Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Text(
                         text = book.name,
-                        style = MaterialTheme.typography.titleLarge, // Use the right style
+                        style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontSize = 18.sp
                     )
-                    Spacer(modifier = Modifier.height(4.dp)) // Spacing between name and author
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "by ${book.author}",
+                        text = "de ${book.author}",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
-                    Spacer(modifier = Modifier.height(4.dp)) // Spacing between author and category
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = book.category,
                         style = MaterialTheme.typography.bodySmall,
@@ -191,7 +195,7 @@ fun BookItem(
                     )
                 }
             }
-            Row { // Add this row
+            Row {
                 IconButton(onClick = onWantToReadClick) {
                     Icon(
                         imageVector = if (DataSource.isWantToRead(book)) Icons.Outlined.Check else Icons.Outlined.Add,

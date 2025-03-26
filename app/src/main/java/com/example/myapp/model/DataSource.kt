@@ -41,7 +41,7 @@ object DataSource {
             id = "3",
             name = "Os sofrimentos do jovem Werther",
             author = "Johann Wolfgang Von Goethe",
-            category = "Romance epistolar",
+            category = "Romance",
             resume = "Os sofrimentos do Jovem Werther é definido como um marco na literatura alemã e mundial. Escrito em 1774, foi " +
                     "uma das obras que mais influenciaram os jovens do período. Marcada por uma narração densa, lírica e essencialmente" +
                     " psicológica, a personagem atormentada de Werther tornou-se um modelo de herói pré-romântico. A obra relata a " +
@@ -146,6 +146,23 @@ object DataSource {
             imageResId = R.drawable.six_of_crows),
         Book(
             id = "10",
+            name = "Six of crows:  Vingança e Redenção",
+            author = "Leigh Bardugo",
+            category = "Fantasia",
+            resume = "“Confiar na pessoa errada pode custar a própria vida.”Após se safarem milagrosamente de um ousado e perigoso " +
+                    "assalto na notória Corte do Gelo, Kaz Brekker e sua equipe se sentem invencíveis. Mas o destino está prestes a " +
+                    "dar uma perigosa guinada e, em vez de dividir uma vultosa recompensa, os seis comparsas terão que se munir de " +
+                    "forças, de armas e de seus talentos para lutar pelas próprias vidas. Traídos e devastados pelo sequestro de um " +
+                    "valioso membro da equipe, o Clube do Corvo agora conta com poucos recursos e aliados, e quase nenhuma esperança. " +
+                    "Enquanto isso, forças descomunalmente poderosas se abatem sobre Ketterdam para desenterrar os segredos mais " +
+                    "sombrios da potente droga conhecida como jurda parem, ao passo que antigos rivais e novos inimigos surgem para " +
+                    "desafiar a perspicácia de Kaz e testar a frágil lealdade de seus parceiros. Agora, todos terão de enfrentar seus " +
+                    "próprios demônios, e será preciso muito mais do que sorte para sobreviver à guerra que está se armando nas ruas" +
+                    " obscuras e tortuosas desse implacável submundo – uma batalha por vingança e redenção que decidirá o futuro do " +
+                    "mundo Grisha.",
+            imageResId = R.drawable.six_of_crows_2),
+        Book(
+            id = "11",
             name = "Meu filho Dahmer",
             author = "Lionel Dahmer",
             category = "True crime",
@@ -153,11 +170,13 @@ object DataSource {
                     "a origem da verdadeira fome que habitava os olhos e a mente de seu filho",
             imageResId = R.drawable.meu_filho_dahmer),
     )
+
+
     var favoriteBooks: SnapshotStateList<Book> = mutableStateListOf()
-    //private val wantToReadBooks = mutableListOf<Book>()
     var wantToReadBooks: SnapshotStateList<Book> = mutableStateListOf()
     var finishedReadingBooks: SnapshotStateList<Book> = mutableStateListOf()
 
+// Lista de livros favoritos
     fun addToFavorites(book: Book) {
         if (!favoriteBooks.contains(book)) {
             favoriteBooks.add(book)
@@ -169,7 +188,7 @@ object DataSource {
     fun isFavorite(book: Book): Boolean {
         return favoriteBooks.contains(book)
     }
-    //
+// Lista de livros para ler
     fun addToWantToRead(book: Book) {
         if (!wantToReadBooks.contains(book)) {
             wantToReadBooks.add(book)
@@ -181,7 +200,7 @@ object DataSource {
     fun isWantToRead(book: Book): Boolean {
         return wantToReadBooks.contains(book)
     }
-//
+// Lista de livros finalizados
     fun addToFinishedReading(book: Book) {
         if (!finishedReadingBooks.contains(book)) {
             finishedReadingBooks.add(book)
@@ -197,9 +216,12 @@ object DataSource {
     fun getBookById(bookId: String): Book {
         return books.first { it.id == bookId }
     }
+
+// Usuário
     val user = User(
-        name = "User",
+        name = "Username",
+        email = "Username@gmail.com",
         imageResId = R.drawable.user,
-        favoriteBooks = favoriteBooks
+      //  favoriteBooks = favoriteBooks
     )
 }

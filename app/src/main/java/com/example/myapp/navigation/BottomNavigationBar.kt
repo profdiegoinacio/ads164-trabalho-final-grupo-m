@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.myapp.navigation.BottomNavItem
+import androidx.compose.material3.MaterialTheme
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -19,7 +20,7 @@ fun BottomNavigationBar(navController: NavController) {
         BottomNavItem.Profile
     )
     NavigationBar(
-        containerColor = Color.LightGray
+        containerColor = Color.Transparent
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route

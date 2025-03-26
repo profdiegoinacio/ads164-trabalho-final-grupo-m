@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myapp.model.DataSource
 
@@ -47,6 +48,11 @@ fun ProfileScreen(navController: NavHostController) {
             text = user.name,
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = user.email,
+            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp)
         )
     }
 }
