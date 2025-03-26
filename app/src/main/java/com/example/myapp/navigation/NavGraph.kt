@@ -36,7 +36,7 @@ fun NavGraph() {
                     ProfileScreen(navController = navController)
                 }
                 composable(BottomNavItem.Biblioteca.route) {
-                    BibliotecaScreen()
+                    BibliotecaScreen(navController = navController)
                 }
                 composable(
                     route = "details/{bookId}",

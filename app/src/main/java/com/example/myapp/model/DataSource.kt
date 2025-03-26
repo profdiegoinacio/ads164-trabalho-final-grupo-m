@@ -156,6 +156,7 @@ object DataSource {
     var favoriteBooks: SnapshotStateList<Book> = mutableStateListOf()
     //private val wantToReadBooks = mutableListOf<Book>()
     var wantToReadBooks: SnapshotStateList<Book> = mutableStateListOf()
+    var finishedReadingBooks: SnapshotStateList<Book> = mutableStateListOf()
 
     fun addToFavorites(book: Book) {
         if (!favoriteBooks.contains(book)) {
@@ -168,6 +169,7 @@ object DataSource {
     fun isFavorite(book: Book): Boolean {
         return favoriteBooks.contains(book)
     }
+    //
     fun addToWantToRead(book: Book) {
         if (!wantToReadBooks.contains(book)) {
             wantToReadBooks.add(book)
@@ -179,11 +181,22 @@ object DataSource {
     fun isWantToRead(book: Book): Boolean {
         return wantToReadBooks.contains(book)
     }
+//
+    fun addToFinishedReading(book: Book) {
+        if (!finishedReadingBooks.contains(book)) {
+            finishedReadingBooks.add(book)
+        }
+    }
+    fun removeFinishedReading(book: Book) {
+        finishedReadingBooks.remove(book)
+    }
+    fun isFinishedReading(book: Book): Boolean {
+        return finishedReadingBooks.contains(book)
+    }
 
-    //fun getWantToReadBooks(): List<Book> {
-    //    return wantToReadBooks
-   // }
-
+    fun getBookById(bookId: String): Book {
+        return books.first { it.id == bookId }
+    }
     val user = User(
         name = "User",
         imageResId = R.drawable.user,

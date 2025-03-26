@@ -19,6 +19,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material.icons.outlined.ThumbUpOffAlt
 import androidx.compose.material3.Button
@@ -89,7 +91,7 @@ fun HomeScreen(navController: NavHostController) {
                 active = it
             },
             placeholder = {
-                Text(text = "Search for books")
+                Text(text = "Pesquisar por livros")
             },
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon")
@@ -192,10 +194,10 @@ fun BookItem(
             Row { // Add this row
                 IconButton(onClick = onWantToReadClick) {
                     Icon(
-                        imageVector = if (DataSource.isWantToRead(book)) Icons.Filled.ThumbUp else Icons.Outlined.ThumbUpOffAlt,
+                        imageVector = if (DataSource.isWantToRead(book)) Icons.Outlined.Check else Icons.Outlined.Add,
                         contentDescription = "Want to Read",
-                        tint = if (DataSource.isWantToRead(book)) Color.Green else Color.Gray,
-                        modifier = Modifier.size(32.dp) // Bigger icon size
+                        tint = if (DataSource.isWantToRead(book)) Color.Blue else Color.Gray,
+                        modifier = Modifier.size(32.dp)
                     )
                 }
                 IconButton(onClick = onFavoriteClick) {
