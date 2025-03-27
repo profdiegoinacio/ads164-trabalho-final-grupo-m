@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.myapp.model.DataSource
+import com.example.myapp.data.model.DataSource
 
 @Composable
 fun ProfileScreen(navController: NavHostController) {

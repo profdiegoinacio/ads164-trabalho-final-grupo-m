@@ -1,4 +1,4 @@
-package com.example.myapp.model
+package com.example.myapp.data.model
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -176,39 +176,47 @@ object DataSource {
     var wantToReadBooks: SnapshotStateList<Book> = mutableStateListOf()
     var finishedReadingBooks: SnapshotStateList<Book> = mutableStateListOf()
 
-// Lista de livros favoritos
+    // Lista de livros favoritos
     fun addToFavorites(book: Book) {
         if (!favoriteBooks.contains(book)) {
             favoriteBooks.add(book)
         }
     }
+
     fun removeFromFavorites(book: Book) {
         favoriteBooks.remove(book)
     }
+
     fun isFavorite(book: Book): Boolean {
         return favoriteBooks.contains(book)
     }
-// Lista de livros para ler
+
+    // Lista de livros para ler
     fun addToWantToRead(book: Book) {
         if (!wantToReadBooks.contains(book)) {
             wantToReadBooks.add(book)
         }
     }
+
     fun removeFromWantToRead(book: Book) {
         wantToReadBooks.remove(book)
     }
+
     fun isWantToRead(book: Book): Boolean {
         return wantToReadBooks.contains(book)
     }
-// Lista de livros finalizados
+
+    // Lista de livros finalizados
     fun addToFinishedReading(book: Book) {
         if (!finishedReadingBooks.contains(book)) {
             finishedReadingBooks.add(book)
         }
     }
+
     fun removeFinishedReading(book: Book) {
         finishedReadingBooks.remove(book)
     }
+
     fun isFinishedReading(book: Book): Boolean {
         return finishedReadingBooks.contains(book)
     }

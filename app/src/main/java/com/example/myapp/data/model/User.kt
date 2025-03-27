@@ -1,4 +1,4 @@
-package com.example.myapp.model
+package com.example.myapp.data.model
 import androidx.annotation.DrawableRes
 
 data class User(

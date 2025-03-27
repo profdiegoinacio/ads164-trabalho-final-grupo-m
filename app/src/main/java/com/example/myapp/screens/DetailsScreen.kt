@@ -16,18 +16,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AddBox
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckBoxOutlineBlank
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.outlined.Add
-import androidx.compose.material.icons.outlined.AddBox
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.CheckBox
 import androidx.compose.material.icons.outlined.StarBorder
-import androidx.compose.material.icons.outlined.ThumbUpOffAlt
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -43,9 +37,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil3.compose.rememberAsyncImagePainter
-import com.example.myapp.model.Book
-import com.example.myapp.model.DataSource
-
+import com.example.myapp.data.model.DataSource
+import com.example.myapp.data.model.Book
 @Composable
 fun DetailsScreen(navController: NavHostController, bookId: String) {
     val book = DataSource.getBookById(bookId)

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.ksp)
+
 }
 
 android {
@@ -45,6 +47,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.room.runtime) // Runtime do Room
+    ksp(libs.androidx.room.compiler) // Room Annotation Processor -> gera automaticamente código DAO
+    implementation(libs.androidx.room.ktx) // Extensão do Room para Coroutines
     implementation (libs.androidx.material.icons.extended) // ou a versão mais recente
     implementation(libs.androidx.runtime)
     implementation(libs.coil.compose)

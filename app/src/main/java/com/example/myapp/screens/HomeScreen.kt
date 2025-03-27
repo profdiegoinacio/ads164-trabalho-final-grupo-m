@@ -1,7 +1,6 @@
 package com.example.myapp.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,13 +18,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.StarBorder
-import androidx.compose.material.icons.outlined.ThumbUpOffAlt
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -49,11 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.rememberAsyncImagePainter
-import com.example.myapp.model.Book
-import com.example.myapp.model.DataSource
-import com.example.myapp.ui.theme.buttonTextColor
-import com.example.myapp.ui.theme.darkGray
-import com.example.myapp.ui.theme.lightGray
+import com.example.myapp.data.model.Book
+import com.example.myapp.data.model.DataSource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -209,7 +201,7 @@ fun BookItem(
                         imageVector = if (DataSource.isFavorite(book)) Icons.Filled.Star else Icons.Outlined.StarBorder,
                         contentDescription = "Favorite",
                         tint = if (DataSource.isFavorite(book)) Color.Yellow else Color.Gray,
-                        modifier = Modifier.size(32.dp) // Bigger icon size
+                        modifier = Modifier.size(32.dp)
                     )
                 }
             }
