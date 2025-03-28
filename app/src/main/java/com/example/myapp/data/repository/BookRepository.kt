@@ -12,11 +12,10 @@ class BookRepository(private val bookDao: BookDao) {
     fun getBookById(bookId: String): Flow<Book?> = bookDao.getBookById(bookId)
 
     suspend fun updateBook(book: Book) {
-        try {
-            bookDao.updateBook(book)
-        } catch (e: Exception) {
-            Log.e("BookRepository", "Error updating book: ${e.message}", e) // Include the exception for better logging
-        }
+        Log.d("BookRepository", "Updating book: ${book.id}, favorite=${book.isFavorite}, wantToRead=${book.isWantToRead}")
+        bookDao.updateBook(book)
+        Log.d("BookRepository", "Book updated successfully: ${book.id}")
+
     }
 
     fun getFavoriteBooks(): Flow<List<Book>> = bookDao.getFavoriteBooks()
