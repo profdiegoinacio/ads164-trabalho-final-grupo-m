@@ -42,7 +42,6 @@ class BookViewModel(val repository: BookRepository) : ViewModel() {
         }
     }
 
-    // Functions to update list memberships
     fun toggleFavorite(book: Book) {
         viewModelScope.launch {
             val currentBooks = _allBooks.value.toMutableList()
@@ -91,13 +90,4 @@ class BookViewModel(val repository: BookRepository) : ViewModel() {
         }
     }
 
-    class Factory(private val repository: BookRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(BookViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return BookViewModel(repository) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
-        }
-    }
 }

@@ -22,8 +22,8 @@ abstract class AppDatabase : RoomDatabase() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 books.forEach { book ->
-                    CoroutineScope(Dispatchers.IO).launch { // Use the coroutine launch
-                        bookDao.updateBook(book) // Use updateBook to insert or replace
+                    CoroutineScope(Dispatchers.IO).launch {
+                        bookDao.updateBook(book)
                     }
                 }
             }

@@ -35,7 +35,7 @@ import com.example.myapp.data.model.Book
 import com.example.myapp.data.model.DataSource
 
 @Composable
-fun BibliotecaScreen(navController: NavHostController) { // Receive NavHostController
+fun BibliotecaScreen(navController: NavHostController) {
     val favoriteBooks = DataSource.favoriteBooks
     val wantToReadBooks = DataSource.wantToReadBooks
     val finishedReadingBooks = DataSource.finishedReadingBooks
@@ -121,7 +121,7 @@ fun BookItem(book: Book, navController: NavHostController) {
             .width(140.dp)
             .height(230.dp)
             .clickable {
-                navController.navigate("details/${book.id}") // Navigate to DetailsScreen
+                navController.navigate("details/${book.id}")
             },
         colors = CardDefaults.elevatedCardColors(
             containerColor = MaterialTheme.colorScheme.surface

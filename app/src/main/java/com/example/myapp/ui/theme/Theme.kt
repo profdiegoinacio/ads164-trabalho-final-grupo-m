@@ -14,8 +14,8 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
-    primary = MyCustomBlue, // Changed primary color
-    secondary = MyCustomGreen, // Changed secondary color
+    primary = MyCustomBlue,
+    secondary = MyCustomGreen,
     tertiary = Pink40,
     background = darkGray,
     surface = PurpleGrey40,
@@ -24,7 +24,7 @@ private val LightColorScheme = lightColorScheme(
     onTertiary = Color.White,
     onBackground = Color.Black,
     onSurface = Color.Black,
-    // ... assign your new colors to other roles as desired
+
 )
 @Composable
 fun MyAppTheme(

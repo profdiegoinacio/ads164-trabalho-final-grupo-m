@@ -70,7 +70,7 @@ fun HomeScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp) // Padding around the entire screen
+            .padding(16.dp)
             .background(color = MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -99,7 +99,6 @@ fun HomeScreen(navController: NavHostController) {
     }
     ,
 ) {
-            // Removed search results content as it wasn't doing anything
         }
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn(
@@ -146,14 +145,14 @@ fun BookItem(
             .fillMaxWidth()
             .clickable(onClick = onBookClick),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        shape = RoundedCornerShape(16.dp), // Rounded corners for the card
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.elevatedCardColors(
             containerColor = MaterialTheme.colorScheme.surface
         ),
     ) {
         Row(
             modifier = Modifier
-                .padding(16.dp) // Padding within the card
+                .padding(16.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
@@ -199,7 +198,7 @@ fun BookItem(
                     Icon(
                         imageVector = if (DataSource.isWantToRead(book)) Icons.Outlined.Check else Icons.Outlined.Add,
                         contentDescription = "Want to Read",
-                        tint = if (DataSource.isWantToRead(book)) MaterialTheme.colorScheme.secondary else Color.Gray, // Changed color
+                        tint = if (DataSource.isWantToRead(book)) MaterialTheme.colorScheme.secondary else Color.Gray,
                         modifier = Modifier.size(32.dp)
                     )
                 }
@@ -207,7 +206,7 @@ fun BookItem(
                     Icon(
                         imageVector = if (DataSource.isFavorite(book)) Icons.Filled.Star else Icons.Outlined.StarBorder,
                         contentDescription = "Favorite",
-                        tint = if (DataSource.isFavorite(book)) MaterialTheme.colorScheme.primary else Color.Gray, // Changed color
+                        tint = if (DataSource.isFavorite(book)) MaterialTheme.colorScheme.primary else Color.Gray,
                         modifier = Modifier.size(32.dp)
                     )
                 }
