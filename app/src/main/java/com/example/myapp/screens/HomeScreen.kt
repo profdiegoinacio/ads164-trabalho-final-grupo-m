@@ -1,6 +1,7 @@
 package com.example.myapp.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,6 +47,7 @@ import androidx.navigation.NavHostController
 import coil3.compose.rememberAsyncImagePainter
 import com.example.myapp.data.model.Book
 import com.example.myapp.data.model.DataSource
+import androidx.compose.material3.SearchBarDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,31 +70,36 @@ fun HomeScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp), // Padding around the entire screen
+            .padding(16.dp) // Padding around the entire screen
+            .background(color = MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
         SearchBar(
-            modifier = Modifier
-                .fillMaxWidth(),
-            query = query,
-            onQueryChange = { newQuery ->
-                query = newQuery
-            },
-            onSearch = {
-                active = false
-            },
-            active = active,
-            onActiveChange = {
-                active = it
-            },
-            placeholder = {
-                Text(text = "Pesquisar por livros")
-            },
-            leadingIcon = {
-                Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon")
-            }
-        ) {
+    modifier = Modifier.fillMaxWidth(),
+    query = query,
+    onQueryChange = { newQuery ->
+        query = newQuery
+    },
+    onSearch = {
+        active = false
+    },
+    active = active,
+    onActiveChange = {
+        active = it
+    },
+    placeholder = {
+        Text(text = "Pesquisar por livros")
+    },
+    leadingIcon = {
+        Icon(
+            imageVector = Icons.Default.Search,
+            contentDescription = "Search Icon"
+        )
+    }
+    ,
+) {
+            // Removed search results content as it wasn't doing anything
         }
         Spacer(modifier = Modifier.height(16.dp))
         LazyColumn(
@@ -192,7 +199,7 @@ fun BookItem(
                     Icon(
                         imageVector = if (DataSource.isWantToRead(book)) Icons.Outlined.Check else Icons.Outlined.Add,
                         contentDescription = "Want to Read",
-                        tint = if (DataSource.isWantToRead(book)) Color.Blue else Color.Gray,
+                        tint = if (DataSource.isWantToRead(book)) MaterialTheme.colorScheme.secondary else Color.Gray, // Changed color
                         modifier = Modifier.size(32.dp)
                     )
                 }
@@ -200,7 +207,7 @@ fun BookItem(
                     Icon(
                         imageVector = if (DataSource.isFavorite(book)) Icons.Filled.Star else Icons.Outlined.StarBorder,
                         contentDescription = "Favorite",
-                        tint = if (DataSource.isFavorite(book)) Color.Yellow else Color.Gray,
+                        tint = if (DataSource.isFavorite(book)) MaterialTheme.colorScheme.primary else Color.Gray, // Changed color
                         modifier = Modifier.size(32.dp)
                     )
                 }
