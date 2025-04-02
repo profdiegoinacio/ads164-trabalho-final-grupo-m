@@ -15,14 +15,6 @@ Principais funcionalidades incluem:
     *   Marcar livros como Lidos.
     *   Pesquisar por livros.
 
-## Tecnologias Utilizadas
-
-*   **Kotlin:** A principal linguagem de programação.
-*   **Jetpack Compose:** Ferramenta moderna declarativa para construção da interface do usuário.
-*   **Room:** Biblioteca de persistência para gerenciamento de banco de dados local (SQLite).
-*   **MVVM (Model-View-ViewModel):** Padrão arquitetural para separar a lógica da interface do usuário do gerenciamento de dados.
-*   **Coroutines e Flow:** Para manipulação de operações assíncronas e fluxos de dados.
-
 ## Estrutura do Projeto
 
 O projeto segue a estrutura padrão de um aplicativo Android:
@@ -48,22 +40,7 @@ O projeto segue a estrutura padrão de um aplicativo Android:
 
 ## Banco de Dados
 
-O aplicativo utiliza o Room para armazenamento local de dados. O esquema do banco de dados é definido pela entidade `Book`, localizada em `app/src/main/kotlin/com/example/myapp/data/model/Book.kt`. Caso faça alterações na entidade, lembre-se de incrementar a versão do banco de dados em `AppDatabase.kt` e fornecer uma estratégia de migração (se for necessário preservar os dados existentes dos usuários). [Consulte a documentação do Room para orientações sobre migração de banco de dados.]
+O aplicativo tenta utilizar o Room para armazenamento local de dados.
 
-## Arquitetura
 
-O aplicativo segue o padrão arquitetural MVVM:
-
-*   **Model:** Representa a camada de dados, incluindo classes de dados (entidades), DAOs, repositórios e, possivelmente, código relacionado à rede.
-*   **View:** A camada de interface do usuário, construída com Jetpack Compose, responsável por exibir os dados e lidar com interações do usuário.
-*   **ViewModel:** Atua como intermediário entre a View e o Model, preparando os dados para a UI e lidando com a entrada do usuário.
-
-O ViewModel observa os dados do repositório (frequentemente usando Kotlin Flows) e os expõe para a View através de `StateFlow` ou outras estruturas reativas. A View observa esse estado e se recompõe automaticamente quando os dados mudam. Interações do usuário na View acionam métodos no ViewModel, que por sua vez interage com o repositório para atualizar os dados subjacentes.
-
-## Contribuindo
-
-[Adicione diretrizes de contribuição caso deseje aceitar colaborações, ou remova esta seção se o projeto for fechado.]
-
-## Licença
-
-[Especifique aqui a licença do projeto, como MIT, Apache 2.0, ou "Todos os direitos reservados" caso não seja um projeto de código aberto.]
+**Foi utilizado AI para: corrigir erros, dar ideias de layout, e construir o ROOM, além de ajudar adicionar métodos que eu desconhecia.*
