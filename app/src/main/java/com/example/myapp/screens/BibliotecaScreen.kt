@@ -22,6 +22,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,15 +31,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import br.com.exemplo.todo.viewmodel.BookViewModel
 import coil3.compose.rememberAsyncImagePainter
 import com.example.myapp.data.model.Book
+import com.example.myapp.data.model.BookEntity
 import com.example.myapp.data.model.DataSource
 
 @Composable
-fun BibliotecaScreen(navController: NavHostController) {
-    val favoriteBooks = DataSource.favoriteBooks
-    val wantToReadBooks = DataSource.wantToReadBooks
-    val finishedReadingBooks = DataSource.finishedReadingBooks
+fun BibliotecaScreen(navController: NavHostController, bookViewModel: BookViewModel) {
+    //val favoriteBooks = bookViewModel.favoriteBooks.collectAsState(initial = emptyList()).value
+    //val wantToReadBooks = bookViewModel.wantToReadBooks.collectAsState(initial = emptyList()).value
+    //val finishedReadingBooks = bookViewModel.finishedReadingBooks.collectAsState(initial = emptyList()).value
+    val favoriteBooks = bookViewModel.favoriteBooks.collectAsState(initial = emptyList()).value
+    val wantToReadBooks = bookViewModel.wantToReadBooks.collectAsState(initial = emptyList()).value
+    val finishedReadingBooks = bookViewModel.finishedReadingBooks.collectAsState(initial = emptyList()).value
 
     Column(
         modifier = Modifier
@@ -49,73 +55,40 @@ fun BibliotecaScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Top
     ) {
         Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = "Meus livros favoritos:",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            textAlign = TextAlign.Start
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp)
-        ) {
-            items(favoriteBooks) { book ->
-                BookItem(book = book, navController = navController)
-            }
-        }
+        BookSection(title = "Meus livros favoritos:", books = favoriteBooks, navController)
         Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = "Para ler:",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            textAlign = TextAlign.Start
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp)
-        ) {
-            items(wantToReadBooks) { book ->
-                BookItem(book = book, navController = navController)
-            }
-        }
+        BookSection(title = "Para ler:", books = wantToReadBooks, navController)
         Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = "Finalizados:",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            textAlign = TextAlign.Start,
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp)
-        ) {
-            items(finishedReadingBooks) { book ->
-                BookItem(book = book, navController = navController)
-            }
+        BookSection(title = "Finalizados:", books = finishedReadingBooks, navController)
+    }
+}
+
+@Composable
+fun BookSection(title: String, books: List<BookEntity>, navController: NavHostController) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleMedium,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        textAlign = TextAlign.Start
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp)
+    ) {
+        items(books) { book ->
+            BookItem(book = book, navController = navController)
         }
     }
 }
 
 @Composable
-fun BookItem(book: Book, navController: NavHostController) {
+fun BookItem(book: BookEntity, navController: NavHostController) {
     ElevatedCard(
         modifier = Modifier
             .width(140.dp)
@@ -135,7 +108,7 @@ fun BookItem(book: Book, navController: NavHostController) {
             verticalArrangement = Arrangement.Center,
         ) {
             Image(
-                painter = rememberAsyncImagePainter(model = book.imageResId),
+                painter = rememberAsyncImagePainter(model = book.imageResId), // Alterado para imageUrl do Room
                 contentDescription = "Book Cover",
                 modifier = Modifier
                     .width(120.dp)
@@ -145,7 +118,7 @@ fun BookItem(book: Book, navController: NavHostController) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = book.name,
+                text = book.title, // Alterado para title do Room
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,

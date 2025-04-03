@@ -10,16 +10,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import br.com.exemplo.todo.viewmodel.BookViewModel
 import com.example.myapp.screens.BibliotecaScreen
 import com.example.myapp.screens.DetailsScreen
 import com.example.myapp.screens.HomeScreen
 import com.example.myapp.screens.ProfileScreen
 
 @Composable
-fun NavGraph() {
+fun NavGraph(bookViewModel: BookViewModel) {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { BottomNavigationBar(navController) }
+        bottomBar = { BottomNavigationBar(navController, bookViewModel) }
     ) { innerPadding ->
         Column(
             modifier = Modifier

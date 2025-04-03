@@ -1,93 +1,73 @@
-package com.example.myapp.viewmodel
+package br.com.exemplo.todo.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.myapp.data.model.Book
+import com.example.myapp.data.model.BookEntity
 import com.example.myapp.data.repository.BookRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class BookViewModel(val repository: BookRepository) : ViewModel() {
+class BookViewModel  constructor(private val repository: BookRepository) : ViewModel() {
 
-    private val _allBooks = MutableStateFlow<List<Book>>(emptyList())
-    val allBooks: StateFlow<List<Book>> = _allBooks.asStateFlow()
+        val favoriteBooks = repository.favoriteBooks.stateIn(
+            viewModelScope, SharingStarted.Lazily, emptyList()
+        )
 
-    private val _favoriteBooks = MutableStateFlow<List<Book>>(emptyList())
-    val favoriteBooks: StateFlow<List<Book>> = _favoriteBooks.asStateFlow()
+        val wantToReadBooks = repository.wantToReadBooks.stateIn(
+            viewModelScope, SharingStarted.Lazily, emptyList()
+        )
 
-    private val _wantToReadBooks = MutableStateFlow<List<Book>>(emptyList())
-    val wantToReadBooks: StateFlow<List<Book>> = _wantToReadBooks.asStateFlow()
+        val finishedReadingBooks = repository.finishedReadingBooks.stateIn(
+            viewModelScope, SharingStarted.Lazily, emptyList()
+        )
 
-    private val _finishedReadingBooks = MutableStateFlow<List<Book>>(emptyList())
-    val finishedReadingBooks: StateFlow<List<Book>> = _finishedReadingBooks.asStateFlow()
+    private val _uiState = MutableStateFlow<TaskUiState>(TaskUiState.Idle)
+    val uiState: StateFlow<TaskUiState> = _uiState
 
-    init {
-        collectBooks()
-    }
+    // Observe all tasks from the repository
+    val allBooks = repository.allBooks
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    private fun collectBooks() {
+    // Add a task to the repository
+    fun addBook(book: BookEntity) {
         viewModelScope.launch {
-            repository.getAllBooks().collectLatest {
-                _allBooks.value = it
-                Log.d("BookViewModel", "Collected books: ${it.size}")
-            }
-            repository.getFavoriteBooks().collectLatest { _favoriteBooks.value = it }
-            repository.getWantToReadBooks().collectLatest { _wantToReadBooks.value = it }
-            repository.getFinishedReadingBooks().collectLatest { _finishedReadingBooks.value = it }
-        }
-    }
-
-    fun toggleFavorite(book: Book) {
-        viewModelScope.launch {
-            val currentBooks = _allBooks.value.toMutableList()
-            val bookToUpdate = currentBooks.find { it.id == book.id }
-            if (bookToUpdate != null) {
-                val updatedBook = bookToUpdate.copy(isFavorite = !bookToUpdate.isFavorite)
-                val index = currentBooks.indexOfFirst { it.id == updatedBook.id }
-                if (index != -1) {
-                    currentBooks[index] = updatedBook
-                    _allBooks.value = currentBooks
-                }
-                repository.updateBook(updatedBook)
+            _uiState.value = TaskUiState.Loading
+            try {
+                repository.insertBook(book)
+                _uiState.value = TaskUiState.Success("Task added successfully!")
+            } catch (e: Exception) {
+                _uiState.value = TaskUiState.Error("Failed to add task: ${e.localizedMessage}")
             }
         }
     }
 
-    fun toggleWantToRead(book: Book) {
+    // Remove a task from the repository
+    fun removeBook(task: BookEntity) {
         viewModelScope.launch {
-            val currentBooks = _allBooks.value.toMutableList()
-            val bookToUpdate = currentBooks.find { it.id == book.id }
-            if (bookToUpdate != null) {
-                val updatedBook = bookToUpdate.copy(isWantToRead = !bookToUpdate.isWantToRead)
-                val index = currentBooks.indexOfFirst { it.id == updatedBook.id }
-                if (index != -1) {
-                    currentBooks[index] = updatedBook
-                    _allBooks.value = currentBooks
-                }
-                repository.updateBook(updatedBook)
+            _uiState.value = TaskUiState.Loading
+            try {
+                repository.deleteBook(task)
+                _uiState.value = TaskUiState.Success("Task removed successfully!")
+            } catch (e: Exception) {
+                _uiState.value = TaskUiState.Error("Failed to remove task: ${e.localizedMessage}")
             }
         }
     }
 
-    fun toggleFinishedReading(book: Book) {
-        viewModelScope.launch {
-            val currentBooks = _allBooks.value.toMutableList()
-            val bookToUpdate = currentBooks.find { it.id == book.id }
-            if (bookToUpdate != null) {
-                val updatedBook = bookToUpdate.copy(isFinishedReading = !bookToUpdate.isFinishedReading)
-                val index = currentBooks.indexOfFirst { it.id == updatedBook.id }
-                if (index != -1) {
-                    currentBooks[index] = updatedBook
-                    _allBooks.value = currentBooks
-                }
-                repository.updateBook(updatedBook)
-            }
-        }
+    // Clear UI feedback after it's processed
+    fun clearUiState() {
+        _uiState.value = TaskUiState.Idle
     }
+}
 
+// Define a sealed class to represent the UI states
+sealed class TaskUiState {
+    object Idle : TaskUiState() // No action is taking place
+    object Loading : TaskUiState() // Loading state during a task's operation
+    data class Success(val message: String) : TaskUiState() // Success state with a message
+    data class Error(val error: String) : TaskUiState() // Error state with a message
 }

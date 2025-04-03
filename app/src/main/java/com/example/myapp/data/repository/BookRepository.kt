@@ -1,24 +1,23 @@
 package com.example.myapp.data.repository
 
-import android.util.Log
 import com.example.myapp.data.local.BookDao
-import com.example.myapp.data.model.Book
+import com.example.myapp.data.model.BookEntity
 import kotlinx.coroutines.flow.Flow
 
 class BookRepository(private val bookDao: BookDao) {
-
-    fun getAllBooks(): Flow<List<Book>> = bookDao.getAllBooks()
-
-    fun getBookById(bookId: String): Flow<Book?> = bookDao.getBookById(bookId)
-
-    suspend fun updateBook(book: Book) {
-        Log.d("BookRepository", "Updating book: ${book.id}, favorite=${book.isFavorite}, wantToRead=${book.isWantToRead}")
-        bookDao.updateBook(book)
-        Log.d("BookRepository", "Book updated successfully: ${book.id}")
-
+    val allBooks = bookDao.getAllBooks()
+    val favoriteBooks = bookDao.getFavoriteBooks()
+    val wantToReadBooks: Flow<List<BookEntity>> = bookDao.getWantToReadBooks()
+    val finishedReadingBooks: Flow<List<BookEntity>> = bookDao.getFinishedReadingBooks()
+    suspend fun insertBook(book: BookEntity) {
+       bookDao.insertBook(book)
     }
 
-    fun getFavoriteBooks(): Flow<List<Book>> = bookDao.getFavoriteBooks()
-    fun getWantToReadBooks(): Flow<List<Book>> = bookDao.getWantToReadBooks()
-    fun getFinishedReadingBooks(): Flow<List<Book>> = bookDao.getFinishedReadingBooks()
+    suspend fun deleteBook(book: BookEntity) {
+        bookDao.deleteBook(book)
+    }
+
+    suspend fun getBookById(id: Int):BookEntity? {
+        return bookDao.getBookById(id)
+    }
 }
