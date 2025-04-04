@@ -1,73 +1,78 @@
-package br.com.exemplo.todo.viewmodel
+package com.example.myapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapp.data.model.BookEntity
+import com.example.myapp.data.model.DataSource
 import com.example.myapp.data.repository.BookRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class BookViewModel  constructor(private val repository: BookRepository) : ViewModel() {
+class BookViewModel(private val repository: BookRepository) : ViewModel() {
 
-        val favoriteBooks = repository.favoriteBooks.stateIn(
-            viewModelScope, SharingStarted.Lazily, emptyList()
-        )
+    // 🔄 Fluxos de dados do banco
+   // val allBooks: StateFlow<List<BookEntity>> = repository.getAllBooks()
+     //   .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+    private val _allBooks = MutableStateFlow<List<BookEntity>>(emptyList())
+    val allBooks: StateFlow<List<BookEntity>> = _allBooks
 
-        val wantToReadBooks = repository.wantToReadBooks.stateIn(
-            viewModelScope, SharingStarted.Lazily, emptyList()
-        )
+    init {
+        loadBooks()
+    }
 
-        val finishedReadingBooks = repository.finishedReadingBooks.stateIn(
-            viewModelScope, SharingStarted.Lazily, emptyList()
-        )
+    private fun loadBooks() {
+        _allBooks.value = DataSource.books  // <- Aqui é onde carrega os livros do arquivo
+    }
 
-    private val _uiState = MutableStateFlow<TaskUiState>(TaskUiState.Idle)
-    val uiState: StateFlow<TaskUiState> = _uiState
-
-    // Observe all tasks from the repository
-    val allBooks = repository.allBooks
+    val favoriteBooks: StateFlow<List<BookEntity>> = repository.getFavorite()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    // Add a task to the repository
-    fun addBook(book: BookEntity) {
+    val wantToReadBooks: StateFlow<List<BookEntity>> = repository.getWantToRead()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val finishedBooks: StateFlow<List<BookEntity>> = repository.getFinished()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    // 🔍 Buscar livro por ID
+    suspend fun getBookById(id: Int): BookEntity? {
+        return repository.getBookById(id)
+    }
+
+    // ⭐ Alternar favorito
+    fun toggleFavorite(bookId: Int, currentStatus: Boolean) {
         viewModelScope.launch {
-            _uiState.value = TaskUiState.Loading
-            try {
-                repository.insertBook(book)
-                _uiState.value = TaskUiState.Success("Task added successfully!")
-            } catch (e: Exception) {
-                _uiState.value = TaskUiState.Error("Failed to add task: ${e.localizedMessage}")
-            }
+            repository.toggleFavorite(bookId, currentStatus)
         }
     }
 
-    // Remove a task from the repository
-    fun removeBook(task: BookEntity) {
+    // 📖 Alternar "quero ler"
+    fun toggleWantToRead(bookId: Int, currentStatus: Boolean) {
         viewModelScope.launch {
-            _uiState.value = TaskUiState.Loading
-            try {
-                repository.deleteBook(task)
-                _uiState.value = TaskUiState.Success("Task removed successfully!")
-            } catch (e: Exception) {
-                _uiState.value = TaskUiState.Error("Failed to remove task: ${e.localizedMessage}")
-            }
+            repository.toggleWantToRead(bookId, currentStatus)
         }
     }
 
-    // Clear UI feedback after it's processed
-    fun clearUiState() {
-        _uiState.value = TaskUiState.Idle
+    // ✅ Alternar finalizado
+    fun toggleFinished(bookId: Int, currentStatus: Boolean) {
+        viewModelScope.launch {
+            repository.toggleFinished(bookId, currentStatus)
+        }
     }
-}
 
-// Define a sealed class to represent the UI states
-sealed class TaskUiState {
-    object Idle : TaskUiState() // No action is taking place
-    object Loading : TaskUiState() // Loading state during a task's operation
-    data class Success(val message: String) : TaskUiState() // Success state with a message
-    data class Error(val error: String) : TaskUiState() // Error state with a message
+    // ✏️ Atualizar livro (opcional)
+    fun updateBook(book: BookEntity) {
+        viewModelScope.launch {
+            repository.updateBook(book)
+        }
+    }
+
+    // 🗑️ Deletar livro (opcional)
+    fun deleteBook(book: BookEntity) {
+        viewModelScope.launch {
+            repository.deleteBook(book)
+        }
+    }
 }

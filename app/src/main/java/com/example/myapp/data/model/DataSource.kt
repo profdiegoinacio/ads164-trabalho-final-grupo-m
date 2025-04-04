@@ -2,15 +2,14 @@ package com.example.myapp.data.model
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
-//import androidx.preference.contains
 import com.example.myapp.R
 
 object DataSource {
 
-    val books: List<Book> = listOf(
-        Book(
-            id = "1",
-            name = "Em águas profundas",
+    val books: List<BookEntity> = listOf(
+        BookEntity(
+            id = 1,
+            title = "Em águas profundas",
             author = "Patricia Highsmith",
             category = "Suspense",
             resume = "Vic e Melinda estão longe de ser um casal feliz ― seu casamento é mantido por um acordo nada convencional: " +
@@ -21,9 +20,9 @@ object DataSource {
                     "mais do que tolerante e empreendedor abnegado vira alvo da maledicência de todos.",
             imageResId = R.drawable.em_aguas_profundas
         ),
-        Book(
-            id = "2",
-            name = "Manson: A Biografia",
+        BookEntity(
+            id = 2,
+            title = "Manson: A Biografia",
             author = "Jeff Guinn",
             category = "True crime",
             resume = "Charles Manson fez de sua história a trilha sonora do fim do mundo. A metáfora favorita da América para o " +
@@ -37,9 +36,9 @@ object DataSource {
                     "entrou para a história como sinônimo do mal.",
             imageResId = R.drawable.mason
         ),
-        Book(
-            id = "3",
-            name = "Os sofrimentos do jovem Werther",
+        BookEntity(
+            id = 3,
+            title = "Os sofrimentos do jovem Werther",
             author = "Johann Wolfgang Von Goethe",
             category = "Romance",
             resume = "Os sofrimentos do Jovem Werther é definido como um marco na literatura alemã e mundial. Escrito em 1774, foi " +
@@ -49,9 +48,9 @@ object DataSource {
                     "é comovente.",
             imageResId = R.drawable.os_sofrimentos_do_jovem_werther
         ),
-        Book(
-            id = "4",
-            name = "Ted Bundy: Um Estranho ao Meu Lado",
+        BookEntity(
+            id = 4,
+            title = "Ted Bundy: Um Estranho ao Meu Lado",
             author = "Ann Rule",
             category = "True Crime",
             resume = "Quando Ann Rule conheceu Ted Bundy em um centro de atendimento de prevenção ao suicídio, ela não fazia " +
@@ -61,9 +60,9 @@ object DataSource {
                     "é ainda maior. Ele pode até ter salvado vidas pelo centro de prevenção, mas ceifou outras dezenas quando ninguém" +
                     " estava olhando. Inúmeras famílias ficaram sem respostas, e ele foi executado em 1989 na cadeira elétrica.",
             imageResId = R.drawable.ted_bundy),
-        Book(
-            id = "5",
-            name = "A metamorfose",
+        BookEntity(
+            id = 5,
+            title = "A metamorfose",
             author = "Franz Kafka",
             category = "Romance",
             resume = "A metamorfose é a mais célebre novela de Franz Kafka e uma das mais importantes de toda a história da literatura." +
@@ -72,9 +71,9 @@ object DataSource {
                     "inverossímil e o senso de humor ao que é trágico, grotesco e cruel na condição humana - tudo no estilo " +
                     "transparente e perfeito desse mestre inconfundível da ficção universal.",
             imageResId = R.drawable.metamorfose),
-        Book(
-            id = "6",
-            name = "Os abismos",
+        BookEntity(
+            id = 6,
+            title = "Os abismos",
             author = "Pilar Quintana",
             category = "Ficção Literária",
             resume = "Claudia mora com os pais em Cáli, na Colômbia, em um apartamento tomado por plantas e rodeado por precipícios " +
@@ -94,9 +93,9 @@ object DataSource {
                     "assim, o destino da mais velha parece se debruçar sobre o abismo contra o qual tantas outras mulheres também " +
                     "já se depararam.",
             imageResId = R.drawable.os_abismos),
-        Book(
-            id = "7",
-            name = "As outras pessoas",
+        BookEntity(
+            id = 7,
+            title = "As outras pessoas",
             author = "C. J. Tudor",
             category = "Suspense",
             resume = "Gabe Forman está preso em um engarrafamento, atrasado para o jantar em casa com a família, quando o rosto " +
@@ -117,9 +116,9 @@ object DataSource {
                     "Da mesma autora do best-seller O Homem de Giz, um thriller emocionante, cuja narrativa, repleta de ameaça e " +
                     "ação, captura o leitor desde o o início e explora com habilidade a natureza da justiça e a força do luto",
             imageResId = R.drawable.as_outras_pessoas),
-        Book(
-            id = "8",
-            name = "A guerra dos mundos",
+        BookEntity(
+            id = 8,
+            title = "A guerra dos mundos",
             author = "H.G. Wells",
             category = "Ficção científica",
             resume = "Quando um exército de invasores marcianos chega à Inglaterra, o pânico e o terror tomam conta da população. " +
@@ -127,9 +126,9 @@ object DataSource {
                     "com um raio de calor e espalhando gases tóxicos nocivos, os moradores da Terra devem chegar a um acordo com a" +
                     " perspectiva do fim da civilização humana e o início da era marciana.",
             imageResId = R.drawable.a_guerra_dos_mundos),
-        Book(
-            id = "9",
-            name = "Six of crows: Sangue e mentiras",
+        BookEntity(
+            id = 9,
+            title = "Six of crows: Sangue e mentiras",
             author = "Leigh Bardugo",
             category = "Fantasia",
             resume = "A OESTE DE RAVKA, ONDE GRISHAS SÃO ESCRAVIZADOS E ENVOLVIDOS EM JOGOS DE CONTRABANDISTAS E MERCADORES... " +
@@ -144,9 +143,9 @@ object DataSource {
                     "casa; e um prisioneiro que quer se vingar do amor de sua vida.O destino do mundo está nas mãos de seis foras " +
                     "da lei – isso se eles sobreviverem uns aos outros.",
             imageResId = R.drawable.six_of_crows),
-        Book(
-            id = "10",
-            name = "Six of crows:  Vingança e Redenção",
+        BookEntity(
+            id = 10,
+            title = "Six of crows:  Vingança e Redenção",
             author = "Leigh Bardugo",
             category = "Fantasia",
             resume = "“Confiar na pessoa errada pode custar a própria vida.”Após se safarem milagrosamente de um ousado e perigoso " +
@@ -161,9 +160,9 @@ object DataSource {
                     " obscuras e tortuosas desse implacável submundo – uma batalha por vingança e redenção que decidirá o futuro do " +
                     "mundo Grisha.",
             imageResId = R.drawable.six_of_crows_2),
-        Book(
-            id = "11",
-            name = "Meu filho Dahmer",
+        BookEntity(
+            id = 11,
+            title = "Meu filho Dahmer",
             author = "Lionel Dahmer",
             category = "True crime",
             resume = "Neste controverso livro de memórias, o pai de Jeffrey Dahmer busca entender a partir do seu ponto de vista " +
@@ -171,57 +170,56 @@ object DataSource {
             imageResId = R.drawable.meu_filho_dahmer),
     )
 
-
-    var favoriteBooks: SnapshotStateList<Book> = mutableStateListOf()
-    var wantToReadBooks: SnapshotStateList<Book> = mutableStateListOf()
-    var finishedReadingBooks: SnapshotStateList<Book> = mutableStateListOf()
+    var favoriteBooks: SnapshotStateList<BookEntity> = mutableStateListOf()
+    var wantToReadBooks: SnapshotStateList<BookEntity> = mutableStateListOf()
+    var finishedReadingBooks: SnapshotStateList<BookEntity> = mutableStateListOf()
 
     // Lista de livros favoritos
-    fun addToFavorites(book: Book) {
+    fun addToFavorites(book: BookEntity) {
         if (!favoriteBooks.contains(book)) {
             favoriteBooks.add(book)
         }
     }
 
-    fun removeFromFavorites(book: Book) {
+    fun removeFromFavorites(book: BookEntity) {
         favoriteBooks.remove(book)
     }
 
-    fun isFavorite(book: Book): Boolean {
+    fun isFavorite(book: BookEntity): Boolean {
         return favoriteBooks.contains(book)
     }
 
     // Lista de livros para ler
-    fun addToWantToRead(book: Book) {
+    fun addToWantToRead(book: BookEntity) {
         if (!wantToReadBooks.contains(book)) {
             wantToReadBooks.add(book)
         }
     }
 
-    fun removeFromWantToRead(book: Book) {
+    fun removeFromWantToRead(book: BookEntity) {
         wantToReadBooks.remove(book)
     }
 
-    fun isWantToRead(book: Book): Boolean {
+    fun isWantToRead(book: BookEntity): Boolean {
         return wantToReadBooks.contains(book)
     }
 
     // Lista de livros finalizados
-    fun addToFinishedReading(book: Book) {
+    fun addToFinishedReading(book: BookEntity) {
         if (!finishedReadingBooks.contains(book)) {
             finishedReadingBooks.add(book)
         }
     }
 
-    fun removeFinishedReading(book: Book) {
+    fun removeFinishedReading(book: BookEntity) {
         finishedReadingBooks.remove(book)
     }
 
-    fun isFinishedReading(book: Book): Boolean {
+    fun isFinishedReading(book: BookEntity): Boolean {
         return finishedReadingBooks.contains(book)
     }
 
-    fun getBookById(bookId: String): Book {
+    fun getBookById(bookId: Int): BookEntity {
         return books.first { it.id == bookId }
     }
 

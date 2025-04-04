@@ -11,7 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.myapp.navigation.BottomNavItem
 import androidx.compose.material3.MaterialTheme
-import br.com.exemplo.todo.viewmodel.BookViewModel
+import com.example.myapp.viewmodel.BookViewModel
+
 
 @Composable
 fun BottomNavigationBar(navController: NavController, bookViewModel: BookViewModel) {

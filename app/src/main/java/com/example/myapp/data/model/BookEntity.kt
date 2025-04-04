@@ -11,7 +11,7 @@ data class BookEntity(
     val category: String,
     val resume: String,
     val imageResId: Int,
-    val isFavorite: Boolean = false,
-    val isWantToRead: Boolean = false,
-    val isFinished: Boolean = false,
+    var isFavorite: Boolean = false,
+    var isWantToRead: Boolean = false,
+    var isFinished: Boolean = false
 )

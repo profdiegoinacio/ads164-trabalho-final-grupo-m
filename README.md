@@ -43,4 +43,4 @@ O projeto segue a estrutura padrão de um aplicativo Android:
 O aplicativo tenta utilizar o Room para armazenamento local de dados.
 
 
-**Foi utilizado AI para: corrigir erros, dar ideias de layout, e construir o ROOM, além de ajudar adicionar métodos que eu desconhecia.*
+**Foi utilizado AI para: corrigir erros, dar ideias de layout, e ajudar a construir o ROOM, além de ajudar adicionar métodos que eu desconhecia.*

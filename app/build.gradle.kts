@@ -1,4 +1,5 @@
 import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
+import org.gradle.kotlin.dsl.implementation
 
 plugins {
     alias(libs.plugins.android.application)
@@ -47,6 +48,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.room.runtime) // Runtime do Room
     ksp(libs.androidx.room.compiler) // Room Annotation Processor -> gera automaticamente código DAO
     implementation(libs.androidx.room.ktx) // Extensão do Room para Coroutines
@@ -71,4 +73,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
 }

@@ -6,5 +6,8 @@ data class Book(
      val author: String,
      val category: String,
      val resume: String,
-     val imageResId: Int
+     val imageResId: Int,
+     val isFavorite: Boolean = false,
+     val isWantToRead: Boolean = false,
+     val isFinished: Boolean = false,
 )

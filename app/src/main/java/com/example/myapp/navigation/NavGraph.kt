@@ -6,16 +6,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import br.com.exemplo.todo.viewmodel.BookViewModel
 import com.example.myapp.screens.BibliotecaScreen
 import com.example.myapp.screens.DetailsScreen
 import com.example.myapp.screens.HomeScreen
 import com.example.myapp.screens.ProfileScreen
+import com.example.myapp.viewmodel.BookViewModel
 
+//navController: NavHostController,
 @Composable
 fun NavGraph(bookViewModel: BookViewModel) {
     val navController = rememberNavController()
@@ -31,21 +33,21 @@ fun NavGraph(bookViewModel: BookViewModel) {
                 startDestination = BottomNavItem.Home.route
             ) {
                 composable(BottomNavItem.Home.route) {
-                    HomeScreen(navController = navController)
+                    HomeScreen(bookViewModel, navController)
                 }
                 composable(BottomNavItem.Profile.route) {
-                    ProfileScreen(navController = navController)
+                    ProfileScreen(navController)
                 }
                 composable(BottomNavItem.Biblioteca.route) {
-                    BibliotecaScreen(navController = navController)
+                    BibliotecaScreen(bookViewModel, navController)
                 }
                 composable(
                     route = "details/{bookId}",
-                    arguments = listOf(navArgument("bookId") { type = NavType.StringType })
+                    arguments = listOf(navArgument("bookId") { type = NavType.IntType })
                 ) { backStackEntry ->
-                    val bookId = backStackEntry.arguments?.getString("bookId")
+                    val bookId = backStackEntry.arguments?.getInt("bookId")
                     requireNotNull(bookId) { "bookId parameter is required!" }
-                    DetailsScreen(navController, bookId)
+                    DetailsScreen(bookViewModel,navController, bookId)
                 }
             }
         }
