@@ -226,7 +226,7 @@ object DataSource {
 // Usuário
     val user = User(
         name = "Username",
-        email = "Username@gmail.com",
+        email = "123456@upf.br",
         imageResId = R.drawable.user,
       //  favoriteBooks = favoriteBooks
     )

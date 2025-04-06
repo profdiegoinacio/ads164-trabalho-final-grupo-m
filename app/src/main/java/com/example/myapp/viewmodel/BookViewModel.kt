@@ -3,14 +3,13 @@ package com.example.myapp.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapp.data.model.BookEntity
-import com.example.myapp.data.model.DataSource
 import com.example.myapp.data.repository.BookRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-
+import com.example.myapp.data.model.DataSource
 class BookViewModel(private val repository: BookRepository) : ViewModel() {
 
     // 🔄 Fluxos de dados do banco

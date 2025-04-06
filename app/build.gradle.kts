@@ -40,7 +40,8 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        compose = true //enable compose
+        compose = true
+        viewBinding = true//enable compose
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.15" // Correct location
@@ -49,7 +50,13 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.room.runtime) // Runtime do Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx) // Runtime do Room
     ksp(libs.androidx.room.compiler) // Room Annotation Processor -> gera automaticamente código DAO
     implementation(libs.androidx.room.ktx) // Extensão do Room para Coroutines
     implementation (libs.androidx.material.icons.extended) // ou a versão mais recente

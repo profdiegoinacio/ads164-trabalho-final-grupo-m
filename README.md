@@ -1,4 +1,4 @@
-# Meu App - Projeto Final ADS164
+ Meu App - Projeto Final ADS164
 
 Este é o projeto final do curso ADS164, desenvolvido pelo Grupo M. Trata-se de um aplicativo Android construído com Kotlin, utilizando Jetpack Compose para a interface do usuário, Room para persistência de dados local e, provavelmente, seguindo o padrão de arquitetura MVVM.
 
