@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
        val bookDao = BooksApplication.database.bookDao()
-
        val repository = BookRepository(bookDao)
        val bookViewModel: BookViewModel by viewModels {
            BookViewModelFactory(repository, bookDao)

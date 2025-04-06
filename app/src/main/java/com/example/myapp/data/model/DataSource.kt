@@ -1,7 +1,5 @@
 package com.example.myapp.data.model
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.example.myapp.R
 
 object DataSource {
@@ -169,60 +167,6 @@ object DataSource {
                     "a origem da verdadeira fome que habitava os olhos e a mente de seu filho",
             imageResId = R.drawable.meu_filho_dahmer),
     )
-
-    var favoriteBooks: SnapshotStateList<BookEntity> = mutableStateListOf()
-    var wantToReadBooks: SnapshotStateList<BookEntity> = mutableStateListOf()
-    var finishedReadingBooks: SnapshotStateList<BookEntity> = mutableStateListOf()
-
-    // Lista de livros favoritos
-    fun addToFavorites(book: BookEntity) {
-        if (!favoriteBooks.contains(book)) {
-            favoriteBooks.add(book)
-        }
-    }
-
-    fun removeFromFavorites(book: BookEntity) {
-        favoriteBooks.remove(book)
-    }
-
-    fun isFavorite(book: BookEntity): Boolean {
-        return favoriteBooks.contains(book)
-    }
-
-    // Lista de livros para ler
-    fun addToWantToRead(book: BookEntity) {
-        if (!wantToReadBooks.contains(book)) {
-            wantToReadBooks.add(book)
-        }
-    }
-
-    fun removeFromWantToRead(book: BookEntity) {
-        wantToReadBooks.remove(book)
-    }
-
-    fun isWantToRead(book: BookEntity): Boolean {
-        return wantToReadBooks.contains(book)
-    }
-
-    // Lista de livros finalizados
-    fun addToFinishedReading(book: BookEntity) {
-        if (!finishedReadingBooks.contains(book)) {
-            finishedReadingBooks.add(book)
-        }
-    }
-
-    fun removeFinishedReading(book: BookEntity) {
-        finishedReadingBooks.remove(book)
-    }
-
-    fun isFinishedReading(book: BookEntity): Boolean {
-        return finishedReadingBooks.contains(book)
-    }
-
-    fun getBookById(bookId: Int): BookEntity {
-        return books.first { it.id == bookId }
-    }
-
 // Usuário
     val user = User(
         name = "Username",

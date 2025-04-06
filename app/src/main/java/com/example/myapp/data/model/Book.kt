@@ -7,7 +7,4 @@ data class Book(
      val category: String,
      val resume: String,
      val imageResId: Int,
-     val isFavorite: Boolean = false,
-     val isWantToRead: Boolean = false,
-     val isFinished: Boolean = false,
 )
